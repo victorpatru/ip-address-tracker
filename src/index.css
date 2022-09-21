@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  input::placeholder {
+    @apply w-[300px];
+  }
+
+  p {
+    @apply text-xl font-medium text-veryDarkGray;
+  }
+
+  span {
+    @apply uppercase opacity-50 text-sm;
+  }
+
+  li {
+    @apply flex flex-col justify-center items-center space-y-2;
+  }
+}

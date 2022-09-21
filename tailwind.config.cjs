@@ -8,7 +8,10 @@ module.exports = {
         darkGray: "hsl(0, 0%, 59%)",
       },
       fontFamily: {
-        serif: ["Rubik", "sams-serif"],
+        serif: ["Rubik", "sans-serif"],
+      },
+      backgroundImage: {
+        "header-image": "url(./pattern-bg.png)",
       },
     },
   },
