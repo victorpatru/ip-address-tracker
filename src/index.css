@@ -8,7 +8,7 @@
   }
 
   p {
-    @apply text-xl font-medium text-veryDarkGray;
+    @apply text-2xl font-medium text-veryDarkGray;
   }
 
   span {
@@ -16,6 +16,6 @@
   }
 
   li {
-    @apply flex flex-col justify-center items-center space-y-2;
+    @apply flex flex-col justify-center items-center md:justify-start md:items-start space-y-2;
   }
 }
