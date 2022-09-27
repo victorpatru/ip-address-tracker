@@ -10,6 +10,7 @@
 import { useState, useEffect } from "react";
 import Search from "./components/Search";
 import DisplayInfo from "./components/DisplayInfo";
+import DisplayLocation from "./components/DisplayLocation";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -37,17 +38,16 @@ function App() {
   };
 
   return (
-    <section className="min-h-screen flex flex-col justify-start items-center font-serif bg-red-300">
-      {/* Search Component */}
-      <section className="relative w-full flex flex-col justify-center items-center space-y-6">
-        <Search handleSearchChange={handleSearchChange} />
-        <DisplayInfo userData={userData} />
+    <>
+      <section className="min-h-screen flex flex-col justify-start items-center font-serif bg-red-300">
+        {/* Search Component */}
+        <section className="relative w-full flex flex-col justify-center items-center">
+          <Search handleSearchChange={handleSearchChange} />
+          <DisplayInfo userData={userData} />
+          <DisplayLocation />
+        </section>
       </section>
-
-      {/* <DisplayInfo /> */}
-
-      {/* DisplayInfo and DisplayLocation Components */}
-    </section>
+    </>
   );
 }
 export default App;
