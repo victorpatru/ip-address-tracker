@@ -28,13 +28,29 @@ function App() {
     isp: "RCS & RDS SA",
   });
 
+  // Helper function ensuring the inputted value is a valid IP Address
+  function ValidateIPaddress(ipaddress) {
+    if (
+      /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
+        ipaddress
+      )
+    ) {
+      return true;
+    }
+    alert("You have entered an invalid IP address!");
+    return false;
+  }
+
   // Populate our userData object with the inputted ip address
   const handleSearchChange = (e) => {
     e.preventDefault();
-    setUserData({
-      ...userData,
-      ipAddress: e.target.firstChild.value,
-    });
+
+    ValidateIPaddress(e.target.firstChild.value)
+      ? setUserData({
+          ...userData,
+          ipAddress: e.target.firstChild.value,
+        })
+      : alert("You have entered an invalid IP address!");
   };
 
   return (
