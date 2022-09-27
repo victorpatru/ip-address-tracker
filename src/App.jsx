@@ -7,7 +7,7 @@
 [] Search for any IP addresses or domains and see the key information and location
 
 */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "./components/Search";
 import DisplayInfo from "./components/DisplayInfo";
 
@@ -26,6 +26,21 @@ function App() {
     },
     isp: "RCS & RDS SA",
   });
+
+  useEffect(() => {
+    const getIp = async () => {
+      const res = await fetch(`/api/getIpInfo`, {
+        method: "POST",
+        body: JSON.stringify({
+          searchTerm: userData.ipAddress,
+        }),
+      });
+      const ipInfo = await res.json();
+      console.log(ipInfo);
+    };
+
+    getIp();
+  }, []);
 
   // Populate our userData object with the inputted ip address
   const handleSearchChange = (e) => {
