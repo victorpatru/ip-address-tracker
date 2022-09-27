@@ -1,8 +1,8 @@
-// functions/getIpInfo.js
+// functions/helloWorld.js
 exports.handler = async (event, context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({ message: "Hello World" })
   };
 };
-//# sourceMappingURL=getIpInfo.js.map
+//# sourceMappingURL=helloWorld.js.map

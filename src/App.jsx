@@ -27,20 +27,15 @@ function App() {
     isp: "RCS & RDS SA",
   });
 
-  useEffect(() => {
-    const getIp = async () => {
-      const res = await fetch(`/api/getIpInfo`, {
-        method: "POST",
-        body: JSON.stringify({
-          searchTerm: userData.ipAddress,
-        }),
-      });
-      const ipInfo = await res.json();
-      console.log(ipInfo);
-    };
+  // useEffect(() => {
+  //   const getIp = async () => {
+  //     const res = await fetch(`/api/getIpInfo`);
+  //     const ipInfo = await res.json();
+  //     console.log(ipInfo);
+  //   };
 
-    getIp();
-  }, []);
+  //   getIp();
+  // }, []);
 
   // Populate our userData object with the inputted ip address
   const handleSearchChange = (e) => {

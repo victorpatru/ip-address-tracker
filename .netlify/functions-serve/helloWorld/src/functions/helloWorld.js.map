@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["../../../../../../Users/victor_patru/Documents/ip-address-tracker/functions/getIpInfo.js"],
-  "sourceRoot": "/var/folders/g5/crtbmff517l03y3mgpvtvd140000gn/T/tmp-51081-tVPNZ42EeawG",
+  "sources": ["../../../../../../Users/victor_patru/Documents/ip-address-tracker/functions/helloWorld.js"],
+  "sourceRoot": "/var/folders/g5/crtbmff517l03y3mgpvtvd140000gn/T/tmp-52053-1Q8U3D5UDgIz",
   "sourcesContent": ["// const fetch = require(\"node-fetch\");\n// const validator = require(\"validator\");\n\n// exports.handler = async (event, context) => {\n//   const eventBody = JSON.parse(event.body);\n\n//   // Check for IP Address or domain\n//   let extension = \"\";\n//   if (eventBody.searchTerm) {\n//     const { searchTerm } = eventBody;\n//     if (validator.isIP(searchTerm)) {\n//       extension = `&ipAddress=${searchTerm}`;\n//     } else if (validator.isURL(searchTerm)) {\n//       const domain = new URL(searchTerm);\n//       extension = `&domain=${domain.hostname}`;\n//     }\n//   }\n\n//   try {\n//     const res = await fetch(`${API_ENDPOINT}${extension}`);\n//     const data = await res.json();\n//     return { statusCode: 200, body: JSON.stringify({ data }) };\n//   } catch (error) {\n//     console.log(error);\n//     return {\n//       statusCode: 500,\n//       body: JSON.stringify({ error: \"Failed fetching data\" }),\n//     };\n//   }\n// };\n\nexports.handler = async (event, context) => {\n  return {\n    statusCode: 200,\n    body: JSON.stringify({ message: \"Hello World\" }),\n  };\n};\n"],
   "mappings": ";AA+BA,QAAQ,UAAU,OAAO,OAAO,YAAY;AAC1C,SAAO;AAAA,IACL,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU,EAAE,SAAS,cAAc,CAAC;AAAA,EACjD;AACF;",
   "names": []
