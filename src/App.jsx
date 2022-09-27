@@ -7,7 +7,7 @@
 [] Search for any IP addresses or domains and see the key information and location
 
 */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Search from "./components/Search";
 import DisplayInfo from "./components/DisplayInfo";
 
