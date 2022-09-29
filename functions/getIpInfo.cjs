@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const validator = require("validator");
 
-const API_ENDPOINT = `https://geo.ipify.org/api/v2/country,city?apiKey=at_getFpFYVYEUE5xxQHWypYx8IAhzvg`;
+const API_ENDPOINT = `https://geo.ipify.org/api/v2/country,city?apiKey=at_getFpFYVYEUE5xxQHWypYx8IAhzvg&ipAddress=8.8.8.8`;
 
 exports.handler = async (event, context) => {
   const eventBody = JSON.parse(event.body);

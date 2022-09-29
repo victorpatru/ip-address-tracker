@@ -33,9 +33,6 @@ function App() {
       try {
         const res = await fetch(`/api/getIpInfo`, {
           method: "GET",
-          body: JSON.stringify({
-            searchTerm: "8.8.8.8",
-          }),
         });
         const ipInfo = await res.json();
         console.log(ipInfo);
