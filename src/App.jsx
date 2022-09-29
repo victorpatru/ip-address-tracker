@@ -28,6 +28,21 @@ function App() {
     isp: "RCS & RDS SA",
   });
 
+  useEffect(() => {
+    const getIpInfo = async () => {
+      const res = await fetch(`/api/getIpInfo`, {
+        method: "POST",
+        body: JSON.stringify({
+          searchTerm: "8.8.8.8",
+        }),
+      });
+      const ipInfo = await res.json();
+      console.log(ipInfo);
+    };
+
+    getIpInfo();
+  }, []);
+
   // Helper function ensuring the inputted value is a valid IP Address
   function ValidateIPaddress(ipaddress) {
     if (
