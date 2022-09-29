@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../Users/victor_patru/Documents/ip-address-tracker/functions/helloWorld.cjs"],
+  "sourceRoot": "/var/folders/g5/crtbmff517l03y3mgpvtvd140000gn/T/tmp-97472-nNDN2kaEHPsV",
+  "sourcesContent": ["exports.handler = async function (event, context) {\n  return {\n    statusCode: 200,\n    body: JSON.stringify({ message: \"Hello World!\" }),\n  };\n};\n"],
+  "mappings": ";AAAA,QAAQ,UAAU,eAAgB,OAAO,SAAS;AAChD,SAAO;AAAA,IACL,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU,EAAE,SAAS,eAAe,CAAC;AAAA,EAClD;AACF;",
+  "names": []
+}
