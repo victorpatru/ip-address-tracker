@@ -11,22 +11,39 @@ import { useState, useEffect } from "react";
 import Search from "./components/Search";
 import DisplayInfo from "./components/DisplayInfo";
 import DisplayLocation from "./components/DisplayLocation";
+import { publicIpv4 } from "public-ip";
+import Spinner from "./components/Spinner";
 
 function App() {
   const [userData, setUserData] = useState({
-    ipAddress: "86.121.151.191",
+    ipAddress: "8.8.8.8",
     location: {
-      country: "RO",
-      region: "Ilfov",
-      city: "Chiajna",
-      lat: 44.46,
-      lng: 25.97333,
-      postalCode: "",
-      timezone: "+03:00",
-      geonameId: 682159,
+      country: "US",
+      region: "California",
+      city: "Mountain View",
+      lat: 37.40599,
+      lng: -122.078514,
+      postalCode: "94043",
+      timezone: "-07:00",
     },
-    isp: "RCS & RDS SA",
+    isp: "Google LLC",
   });
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Get the current user's IP Address
+    const getCurrentUserIp = async () => {
+      try {
+        const info = await publicIpv4();
+        console.log(info);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    //getCurrentUserIp();
+  }, []);
 
   // Helper function ensuring the inputted value is a valid IP Address
   function ValidateIPaddress(ipaddress) {
@@ -53,6 +70,10 @@ function App() {
       : alert("You have entered an invalid IP address!");
   };
 
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <section className="min-h-screen flex flex-col justify-start items-center font-serif bg-red-300">
@@ -60,7 +81,7 @@ function App() {
         <section className="relative w-full flex flex-col justify-center items-center">
           <Search handleSearchChange={handleSearchChange} />
           <DisplayInfo userData={userData} />
-          <DisplayLocation />
+          <DisplayLocation userData={userData} />
         </section>
       </section>
     </>
