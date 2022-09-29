@@ -30,14 +30,18 @@ function App() {
 
   useEffect(() => {
     const getIpInfo = async () => {
-      const res = await fetch(`/api/getIpInfo`, {
-        method: "POST",
-        body: JSON.stringify({
-          searchTerm: "8.8.8.8",
-        }),
-      });
-      const ipInfo = await res.json();
-      console.log(ipInfo);
+      try {
+        const res = await fetch(`/api/getIpInfo`, {
+          method: "GET",
+          body: JSON.stringify({
+            searchTerm: "8.8.8.8",
+          }),
+        });
+        const ipInfo = await res.json();
+        console.log(ipInfo);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getIpInfo();
