@@ -42,6 +42,26 @@ function App() {
       }
     };
 
+    const getFacts = async () => {
+      try {
+        const res = await fetch(
+          "https://geo.ipify.org/api/v2/country,city?apiKey=at_getFpFYVYEUE5xxQHWypYx8IAhzvg&ipAddress=8.8.8.8",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+            },
+          }
+        );
+        console.log(res);
+        const fact = await res.json();
+        console.log(fact);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getFacts();
+
     //getCurrentUserIp();
   }, []);
 
