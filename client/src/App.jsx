@@ -11,10 +11,22 @@ import { useState, useEffect } from "react";
 import Search from "./components/Search";
 import DisplayInfo from "./components/DisplayInfo";
 import DisplayLocation from "./components/DisplayLocation";
-import { publicIpv4 } from "public-ip";
 import Spinner from "./components/Spinner";
 
 function App() {
+  // Helper function ensuring the inputted value is a valid IP Address
+  function ValidateIPaddress(ipaddress) {
+    if (
+      /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
+        ipaddress
+      )
+    ) {
+      return true;
+    }
+    alert("You have entered an invalid IP address!");
+    return false;
+  }
+
   const [userData, setUserData] = useState({
     ipAddress: "8.8.8.8",
     location: {
@@ -29,79 +41,88 @@ function App() {
     isp: "Google LLC",
   });
 
-  const [loading, setLoading] = useState(false);
+  const [postIpAddress, setPostIpAddress] = useState(null);
 
-  useEffect(() => {
-    // Get the current user's IP Address
-    const getCurrentUserIp = async () => {
-      try {
-        const info = await publicIpv4();
-        console.log(info);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const [loading, setLoading] = useState(true);
 
-    const getFacts = async () => {
-      try {
-        const res = await fetch(
-          "https://geo.ipify.org/api/v2/country,city?apiKey=at_getFpFYVYEUE5xxQHWypYx8IAhzvg&ipAddress=8.8.8.8",
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-            },
-          }
-        );
-        console.log(res);
-        const fact = await res.json();
-        console.log(fact);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getFacts();
-
-    //getCurrentUserIp();
-  }, []);
-
-  // Helper function ensuring the inputted value is a valid IP Address
-  function ValidateIPaddress(ipaddress) {
-    if (
-      /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
-        ipaddress
-      )
-    ) {
-      return true;
+  const getUserIp = async () => {
+    try {
+      const res = await fetch("http://localhost:5005/api/current-ip");
+      const data = await res.json();
+      setPostIpAddress(data.ip);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
     }
-    alert("You have entered an invalid IP address!");
-    return false;
-  }
+  };
+
+  const postUserIp = async (newIpAddress) => {
+    try {
+      if (newIpAddress !== null) {
+        await fetch("http://localhost:5005/api/update-ip", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ipAddress: newIpAddress,
+          }),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getCurrentUserIpInformation = async () => {
+    try {
+      const res = await fetch("http://localhost:5005/api/info-ip");
+      const data = await res.json();
+      setUserData({
+        ...userData,
+        ipAddress: data.ip,
+        location: data.location,
+        isp: data.isp,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Getting the initial information
+  useEffect(() => {
+    getUserIp();
+    postUserIp(postIpAddress);
+    getCurrentUserIpInformation();
+    setLoading(false);
+  }, []);
 
   // Populate our userData object with the inputted ip address
   const handleSearchChange = (e) => {
     e.preventDefault();
 
-    ValidateIPaddress(e.target.firstChild.value)
-      ? setUserData({
-          ...userData,
-          ipAddress: e.target.firstChild.value,
-        })
-      : alert("You have entered an invalid IP address!");
+    if (ValidateIPaddress(e.target.firstChild.value)) {
+      setPostIpAddress(e.target.firstChild.value);
+    } else {
+      alert("You have entered an invalid IP address!");
+      // Replace with react toastify error
+    }
+    postUserIp(postIpAddress);
+    getCurrentUserIpInformation();
+    setLoading(false);
   };
 
-  if (loading) {
+  if (loading || userData.ipAddress === "8.8.8.8") {
     return <Spinner />;
   }
 
   return (
     <>
-      <section className="min-h-screen flex flex-col justify-start items-center font-serif bg-red-300">
+      <section className="min-h-screen flex flex-col justify-start items-center font-serif bg-white">
         {/* Search Component */}
         <section className="relative w-full flex flex-col justify-center items-center">
           <Search handleSearchChange={handleSearchChange} />
           <DisplayInfo userData={userData} />
-          <DisplayLocation userData={userData} />
+          {userData.ipAddress === postIpAddress && (
+            <DisplayLocation userData={userData} />
+          )}
         </section>
       </section>
     </>
