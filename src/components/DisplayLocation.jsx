@@ -1,4 +1,6 @@
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+// Add Custom Map Icon
+import { MapContainer, TileLayer } from "react-leaflet";
+import MarketPosition from "./MarkerPosition";
 
 function DisplayLocation({ userData }) {
   const {
@@ -16,9 +18,7 @@ function DisplayLocation({ userData }) {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png"
       />
-      <Marker position={[lat, lng]}>
-        <Popup>{`The address attached to this IP can be found in ${city}, ${region}`}</Popup>
-      </Marker>
+      <MarketPosition lat={lat} lng={lng} />
     </MapContainer>
   );
 }

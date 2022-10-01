@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Search({ handleSearchChange }) {
+function Search({ handleSearchChange, getUserIp }) {
   const [ipAddress, setIpAddress] = useState("");
 
   const handleChange = (e) => {
@@ -10,7 +10,16 @@ function Search({ handleSearchChange }) {
   return (
     <header className="bg-header-image bg-fixed w-full h-60  xl:h-64 xl:bg-contain brightness-125	">
       <section className="flex flex-col justify-center items-center pt-8 space-y-8 max-w-xl  md:max-w-3xl mx-auto">
-        <h1 className="text-white text-3xl font-medium">IP Address Tracker</h1>
+        <div className="flex flex-row justify-center items-center space-x-3 text-white font-medium">
+          <h1 className="text-3xl ">IP Address Tracker</h1>
+          <button
+            type="submit"
+            className="bg-blue-700 px-4 py-2 rounded-md hover:bg-blue-600"
+            onClick={getUserIp}
+          >
+            Get my Ip Address
+          </button>
+        </div>
         <form className="w-10/12 relative" onSubmit={handleSearchChange}>
           <input
             type="text"

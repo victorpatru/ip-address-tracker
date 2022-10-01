@@ -11,7 +11,7 @@ module.exports = {
         serif: ["Rubik", "sans-serif"],
       },
       backgroundImage: {
-        "header-image": "url(./pattern-bg.png)",
+        "header-image": "url(./assets/pattern-bg.png)",
       },
     },
   },
